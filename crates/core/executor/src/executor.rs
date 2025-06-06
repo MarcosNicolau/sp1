@@ -14,7 +14,6 @@ use sp1_primitives::consts::BABYBEAR_PRIME;
 use sp1_stark::{air::PublicValues, SP1CoreOpts};
 use strum::IntoEnumIterator;
 use thiserror::Error;
-use tracing::warn;
 
 use crate::{
     context::{IoOptions, SP1Context},
@@ -1889,7 +1888,7 @@ impl<'a> Executor<'a> {
         // Clone self.state without memory, uninitialized_memory, proof_stream in it so it's faster.
         let memory = std::mem::take(&mut self.state.memory);
         let uninitialized_memory = std::mem::take(&mut self.state.uninitialized_memory);
-        let proof_stream = self.state.proof_stream.clone();
+        let proof_stream = std::mem::take(&mut self.state.proof_stream);
         let mut checkpoint = tracing::debug_span!("clone").in_scope(|| self.state.clone());
         self.state.memory = memory;
         self.state.uninitialized_memory = uninitialized_memory;

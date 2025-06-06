@@ -14,6 +14,7 @@ use sp1_primitives::consts::BABYBEAR_PRIME;
 use sp1_stark::{air::PublicValues, SP1CoreOpts};
 use strum::IntoEnumIterator;
 use thiserror::Error;
+use tracing::warn;
 
 use crate::{
     context::{IoOptions, SP1Context},
@@ -1884,6 +1885,7 @@ impl<'a> Executor<'a> {
         self.memory_checkpoint.clear();
         self.executor_mode = ExecutorMode::Checkpoint;
         self.emit_global_memory_events = emit_global_memory_events;
+        warn!("CHANGED PRFOO STREAM CLONING NOW");
 
         // Clone self.state without memory, uninitialized_memory, proof_stream in it so it's faster.
         let memory = std::mem::take(&mut self.state.memory);

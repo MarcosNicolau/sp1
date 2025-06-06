@@ -1889,10 +1889,12 @@ impl<'a> Executor<'a> {
         let memory = std::mem::take(&mut self.state.memory);
         let uninitialized_memory = std::mem::take(&mut self.state.uninitialized_memory);
         let proof_stream = std::mem::take(&mut self.state.proof_stream);
+        let proof_stream_ptr = std::mem::take(&mut self.state.proof_stream_ptr);
         let mut checkpoint = tracing::debug_span!("clone").in_scope(|| self.state.clone());
         self.state.memory = memory;
         self.state.uninitialized_memory = uninitialized_memory;
         self.state.proof_stream = proof_stream;
+        self.state.proof_stream_ptr = proof_stream_ptr;
 
         let done = tracing::debug_span!("execute").in_scope(|| self.execute())?;
         // Create a checkpoint using `memory_checkpoint`. Just include all memory if `done` since we

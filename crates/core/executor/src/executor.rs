@@ -2127,8 +2127,7 @@ impl<'a> Executor<'a> {
         // Ensure that all proofs and input bytes were read, otherwise warn the user.
         if self.state.proof_stream_ptr < (self.state.proof_stream.len() - 1) {
             tracing::warn!(
-                "Not all proofs were read. Proving will fail during recursion. Did you pass too
-        many proofs in or forget to call verify_sp1_proof?"
+                "Not all proofs read DEBUG!!"
             );
         }
 

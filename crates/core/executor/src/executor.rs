@@ -2127,8 +2127,8 @@ impl<'a> Executor<'a> {
         // Ensure that all proofs and input bytes were read, otherwise warn the user.
         if self.state.proof_stream_ptr < (self.state.proof_stream.len() - 1) {
             tracing::warn!(
-                "Not all proofs read DEBUG!!"
-            );
+                "Not all proofs read DEBUG!! PROOF PTR {}, PROOF STREAM LEN {}"
+            , self.state.proof_stream_ptr, self.state.proof_stream.len());
         }
 
         if !self.state.input_stream.is_empty() {

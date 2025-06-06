@@ -2127,17 +2127,17 @@ impl<'a> Executor<'a> {
         }
 
         // Ensure that all proofs and input bytes were read, otherwise warn the user.
-        if self.state.proof_stream_ptr < (self.state.proof_stream.len() - 1) {
-            tracing::warn!(
-                "Not all proofs read DEBUG!! PROOF PTR {}, PROOF STREAM LEN {}",
-                self.state.proof_stream_ptr,
-                self.state.proof_stream.len()
-            );
-        } else {
+        if self.state.proof_stream_ptr == self.state.proof_stream.len() {
             tracing::info!(
                 "All proofs read PROOF STREAM LEN {}, PROOF STREAM PTR {}",
                 self.state.proof_stream.len(),
                 self.state.proof_stream_ptr
+            );
+        } else {
+            tracing::warn!(
+                "Not all proofs read DEBUG!! PROOF PTR {}, PROOF STREAM LEN {}",
+                self.state.proof_stream_ptr,
+                self.state.proof_stream.len()
             );
         }
 

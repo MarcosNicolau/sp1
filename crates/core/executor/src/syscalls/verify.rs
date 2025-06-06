@@ -35,6 +35,9 @@ impl Syscall for VerifySyscall {
 
             let vkey_bytes: [u32; 8] = vkey.try_into().unwrap();
             let pv_digest_bytes: [u32; 8] = pv_digest.try_into().unwrap();
+
+            tracing::warn!("VERIFYING PROOF INDEX {} VK BYTES {:?}", proof_index, vkey_bytes);
+
             if let Some(verifier) = rt.subproof_verifier {
                 verifier
                     .verify_deferred_proof(proof, proof_vk, vkey_bytes, pv_digest_bytes)

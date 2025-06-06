@@ -2133,10 +2133,11 @@ impl<'a> Executor<'a> {
                 self.state.proof_stream.len()
             );
         } else {
-            tracing::info!("All proofs read PROOF STREAM LEN {}, PROOF STREAM PTR",
-                self.state.proof_stream.len()
-                self.state.proof_stream_ptr,
-            )
+            tracing::info!(
+                "All proofs read PROOF STREAM LEN {}, PROOF STREAM PTR {}",
+                self.state.proof_stream.len(),
+                self.state.proof_stream_ptr
+            );
         }
 
         if !self.state.input_stream.is_empty() {
